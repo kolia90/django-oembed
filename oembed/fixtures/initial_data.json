@@ -133,9 +133,9 @@
     "pk": 14,
     "model": "oembed.providerrule",
     "fields": {
-      "regex": "http(s)?:\/\/\\S*.youtube.com\/watch\\S*",
-      "endpoint": "http:\/\/oohembed.com\/oohembed\/",
-      "name": "YouTube (OohEmbed)",
+      "regex": "http(s)?:\/\/(\\S*.youtube.com\/watch|youtu.be)\\S*",
+      "endpoint": "http:\/\/www.youtube.com\/oembed",
+      "name": "YouTube ",
       "format": 1
     }
   },
