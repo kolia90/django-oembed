@@ -6,10 +6,7 @@ try:
     from cStringIO import StringIO
 except ImportError:
     from StringIO import StringIO
-try:
-    import simplejson
-except ImportError:
-    from django.utils import simplejson
+import json
 from django.conf import settings
 from django.utils.safestring import mark_safe
 from oembed.models import ProviderRule, StoredOEmbed
@@ -165,7 +162,7 @@ def replace(text, max_width=MAX_WIDTH, max_height=MAX_HEIGHT, fixed_width=False,
                     url += '&height=%s' % max_height
 
                 # Fetch the link and parse the JSON.
-                resp = simplejson.loads(fetch(url))
+                resp = json.loads(fetch(url))
                 # Depending on the embed type, grab the associated template and
                 # pass it the parsed JSON response as context.
                 replacement = render_to_string('oembed/%s.html' % resp['type'], {'response': resp})
@@ -175,7 +172,7 @@ def replace(text, max_width=MAX_WIDTH, max_height=MAX_HEIGHT, fixed_width=False,
                         max_width=max_width,
                         max_height=max_height,
                         html=replacement,
-                        oembed=simplejson.dumps(resp)
+                        oembed=json.dumps(resp)
                     )
                     stored[stored_embed.match] = stored_embed
                     parts[id_to_replace] = replacement
